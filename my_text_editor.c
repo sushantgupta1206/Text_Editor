@@ -203,6 +203,33 @@ void inorder(text_node *txt){
 	}
 }
 
+/* This function gets the line of number index, if such a line exists, and returns NULL else */
+char *get_line(text_node *text, int index) 
+{
+	int count = index;
+	text_node *tmp_node = text;
+	if (text->key < index || index == 0 || text->key == -1)
+	{
+		return NULL;
+	}
+	else
+	{
+		while(tmp_node->right != NULL)
+                {
+                        if (count <= tmp_node->left->key)
+                        {
+                                tmp_node = tmp_node->left;
+                        }
+                        else
+                        {
+                                count -= tmp_node->left->key;
+                                tmp_node = tmp_node->right;
+                        }
+                }
+		return (char *)(tmp_node->left);
+	}
+} 
+
 int main() {
 	text_node *text1;
 	printf("Create a new text file\n");
