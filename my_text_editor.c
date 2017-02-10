@@ -182,6 +182,14 @@ void append_line(text_node *text, char *new_line){
 		}
 	}
 }
+/* This function returns the deleted node to the free list */
+void return_node(text_text *node)
+{  
+	node->right = free_list;
+   	free_list = node;
+   	total_nodes_returned +=1;
+}
+
 /* This function performs the inorder traversal of a given tree */
 void inorder(text_node *txt){
 	if (txt->right == NULL)	{
