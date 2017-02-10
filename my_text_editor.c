@@ -183,16 +183,40 @@ void append_line(text_node *text, char *new_line){
 	}
 }
 /* This function returns the deleted node to the free list */
-void return_node(text_text *node)
+void return_node(text_node *node)
 {  
 	node->right = free_list;
    	free_list = node;
    	total_nodes_returned +=1;
 }
 
+
+/* This function is used to find the height of a tree or sub-tree */
+int max_height(text_node *text) 
+{
+	int left_depth, right_depth;
+	if (text->right == NULL) 
+	{
+		return 0;
+	}
+   	else
+   	{
+   		left_depth = max_height(text->left);
+       		right_depth = max_height(text->right);
+       		if (left_depth < right_depth) 
+		{
+           		return (right_depth+1);
+       		}
+		else
+		{ 
+			return (left_depth+1);
+   		}
+	}
+} 
+
 /* This function performs the inorder traversal of a given tree */
-void inorder(text_node *txt){
-	if (txt->right == NULL)	{
+void inorder(text_node *text){
+	if (text->right == NULL)	{
 /*			printf("************************\n");
 			printf("The key is %d\n", txt->key);
 			printf("The height is %d\n", txt->height);*/
@@ -202,12 +226,12 @@ void inorder(text_node *txt){
 
 		return;
 	}
-	else if (txt != NULL){
+	else if (text != NULL){
 
-		inorder(txt->left);
+		inorder(text->left);
 		
 			
-		inorder(txt->right);
+		inorder(text->right);
 	}
 }
 
