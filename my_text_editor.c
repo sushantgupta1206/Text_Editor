@@ -79,6 +79,18 @@ void right_rotation(text_node *node){
 	tmp_node->parent = node->right;
 }
 
+void preorder(text_node *text) {
+	if (text == NULL) {
+		printf("Coming up\n");
+		return;
+	}
+	printf("%s\t height : %d \t key : %d\n", (char *)text, text->height, text->key);
+	printf("Going left\n");
+	preorder(text->left);
+	printf("Going right\n");
+	preorder(text->right);
+	printf("Coming up\n");
+}
 /* This function appends new line at the end*/
 void append_line(text_node *text, char *new_line){
 	text_node *tmp_node = text;
