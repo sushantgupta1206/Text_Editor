@@ -96,7 +96,9 @@ void append_line(text_node *text, char *new_line){
 	text_node *tmp_node = text;
 	int traversal_complete  = 0;
 	if (text->left == NULL){
-		text->left = (text_node *)create_object(new_line);//ask barve
+		text->left = (text_node *)create_object(new_line);
+		text->left->left = NULL;
+		text->left->right = NULL;
 		text->right = NULL;
 		text->parent = NULL;
 		text->key = 1;
@@ -119,6 +121,9 @@ void append_line(text_node *text, char *new_line){
 		prev_leaf->height = 0;
 
 		next_leaf->left = (text_node *)create_object(new_line);
+		next_leaf->left->left = NULL;
+		next_leaf->left->right = NULL;
+		
 		next_leaf->key = tmp_node->key;
 		next_leaf->right = NULL;
 		next_leaf->parent = tmp_node;
